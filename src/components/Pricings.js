@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Pricings extends Component {
   render() {
@@ -22,39 +23,39 @@ export default class Pricings extends Component {
                 <p className="text__teritary">
                   The easiest way to get started with Dollarbird for everyone.
                 </p>
-                <a href="">
+                <Link to="/charge">
                   <button className="btn btn-main--pricing"> Start Now </button>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 herizontal-line text-center mt-mb-md">
               <div className="pall-35 d-flex flex-column justify-content-between pricing__box t1">
                 <h3 className="heading__teritary"> Enterprise Plan </h3>
                 <span className="pricing__price pricing__price--active">
-                  $19.00
+                  $19 .00
                 </span>
                 <span className="pricing__period"> MONTH </span>
                 <p className="text__teritary">
                   Unlimited for 15 Users.Advanced collaborative option for
                   partners, families, freelancers.
                 </p>
-                <a href="">
+                <Link to="/charge">
                   <button className="btn btn-main"> Start Now </button>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 text-center">
               <div className="pall-35 d-flex flex-column justify-content-between pricing__box t2">
                 <h3 className="heading__teritary"> Unlimited Plan </h3>
-                <span className="pricing__price"> $39.00 </span>
+                <span className="pricing__price"> $39 .00 </span>
                 <span className="pricing__period"> MONTH </span>
                 <p className="text__teritary">
                   Collaborative financial tracking and planning for small
                   businesses and enterprises.
                 </p>
-                <a href="">
+                <Link to="/charge">
                   <button className="btn btn-main--pricing"> Start Now </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

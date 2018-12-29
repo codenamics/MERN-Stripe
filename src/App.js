@@ -1,20 +1,19 @@
 import React, { Component } from "react";
-import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "./components/CheckoutForm";
+import { StripeProvider } from "react-stripe-elements";
 import Pricing from "./components/Pricings";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Stripe from "./components/Stripe";
 class App extends Component {
   render() {
     return (
-      <div>
-        <Pricing />
-      </div>
       // <StripeProvider apiKey="pk_test_A2SjqfOGQAF42tSHcxIk1Zpw">
-      //   <div className="flex-xy">
-      //     <Elements>
-      //       <CheckoutForm />
-      //     </Elements>
-      //   </div>
       // </StripeProvider>
+      <Router>
+        <React.Fragment>
+          <Route exact path="/" component={Pricing} />
+          {/* <Route exact path="/charge" component={Stripe} /> */}
+        </React.Fragment>
+      </Router>
     );
   }
 }
