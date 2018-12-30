@@ -3,6 +3,13 @@ import axios from "axios";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import styled from "styled-components";
 
+const CheckOut = styled.div`
+  background-color: #6772e5;
+  width: 100%;
+  height: 100vh;
+  padding-top: 150px;
+`;
+
 const CheckOutForm = styled.form`
   margin: 0 auto;
   width: 100%;
@@ -96,7 +103,7 @@ class CheckoutForm extends Component {
   render() {
     if (this.state.complete) return <h1> Purchase Complete </h1>;
     return (
-      <div className="checkout">
+      <CheckOut>
         <CheckOutForm>
           <CheckOutFieldSet>
             <InputRow>
@@ -116,8 +123,8 @@ class CheckoutForm extends Component {
             <CardElement />
           </CheckOutFieldSet>
         </CheckOutForm>
-        <ButtonCheckOut onClick={this.submit}>Send</ButtonCheckOut>
-      </div>
+        <ButtonCheckOut onClick={this.submit}> Send </ButtonCheckOut>
+      </CheckOut>
     );
   }
 }
