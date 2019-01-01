@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import styled from "styled-components";
 
@@ -78,22 +77,36 @@ class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      complete: false
+      complete: false,
+      name: "",
+      email: ""
     };
   }
-
+  handleChange = input => e => {
+    this.setState({
+      [input]: e.target.value
+    });
+    console.log(this.state.email);
+  };
   submit = async () => {
     let { token } = await this.props.stripe.createToken({
-      name: "Name"
+      name: this.state.name,
+      email: this.state.email
     });
+    console.log(token);
+    const email = this.state.email;
+    const data = {
+      token: token.id,
+      email
+    };
     let response = await fetch("/charge", {
       method: "POST",
       headers: {
         "Content-Type": "text/plain"
       },
-      body: token.id
+      body: JSON.stringify(data)
     });
-    console.log(response);
+    console.log(data);
     if (response.ok)
       this.setState({
         complete: true
@@ -108,11 +121,19 @@ class CheckoutForm extends Component {
           <CheckOutFieldSet>
             <InputRow>
               <Label htmlFor=""> Name </Label>
-              <Input type="text" placeholder="Jane Doe" />
+              <Input
+                type="text"
+                placeholder="Jane Doe"
+                onChange={this.handleChange("name")}
+              />
             </InputRow>
             <InputRow>
               <Label htmlFor=""> Email </Label>
-              <Input type="email" placeholder="jane@doe.com" />
+              <Input
+                type="email"
+                placeholder="jane@doe.com"
+                onChange={this.handleChange("email")}
+              />
             </InputRow>
             <InputRow last>
               <Label htmlFor=""> Phone </Label>
