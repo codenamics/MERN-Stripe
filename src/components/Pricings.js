@@ -45,8 +45,6 @@ const PricingBox = styled.div`
   max-width: 345px;
   height: 425px;
   margin: 0 auto;
-  ${props =>
-    props.HorizontalLine ? "border-left: 1px solid #4b4b4b21" : "border: none"};
 `;
 
 const Price = styled.span`
@@ -74,50 +72,47 @@ export default class Pricings extends Component {
     return (
       <Pricing>
         <Container>
-          <HeadingSecondary>Pricing</HeadingSecondary>
+          <HeadingSecondary> Pricing </HeadingSecondary>{" "}
           <p className="text__secondary text__secondary--desc text-center">
             Get started for free, or have multiple calendars right from the
             beginning.Explore our monthly and yearly plans and pick the one that
-            best suits your needs.
-          </p>
+            best suits your needs.{" "}
+          </p>{" "}
           <Row>
             <PricingBox>
-              <HeadingTeriniary> Starter Plan </HeadingTeriniary>
-              <Price> Free </Price>
-              <Period> MONTH </Period>
+              <HeadingTeriniary> Starter Plan </HeadingTeriniary>{" "}
+              <Price> Free </Price> <Period> MONTH </Period>{" "}
               <Description>
-                The easiest way to get started with Dollarbird for everyone.
-              </Description>
+                The easiest way to get started with Dollarbird for everyone.{" "}
+              </Description>{" "}
               <Link to="/charge">
-                <button className="btn btn-main--pricing"> Start Now </button>
-              </Link>
-            </PricingBox>
-            <PricingBox HorizontalLine>
-              <HeadingTeriniary> Enterprise Plan </HeadingTeriniary>
-              <Price active>$19.00</Price>
-              <Period> MONTH </Period>
+                <button className="btn btn-main--pricing"> Start Now </button>{" "}
+              </Link>{" "}
+            </PricingBox>{" "}
+            <PricingBox className="horizontal">
+              <HeadingTeriniary> Enterprise Plan </HeadingTeriniary>{" "}
+              <Price active> $19 .00 </Price> <Period> MONTH </Period>{" "}
               <Description>
                 Unlimited for 15 Users.Advanced collaborative option for
-                partners, families, freelancers.
-              </Description>
+                partners, families, freelancers.{" "}
+              </Description>{" "}
               <Link to="/charge">
-                <button className="btn btn-main"> Start Now </button>
-              </Link>
-            </PricingBox>
+                <button className="btn btn-main"> Start Now </button>{" "}
+              </Link>{" "}
+            </PricingBox>{" "}
             <PricingBox>
-              <HeadingTeriniary> Unlimited Plan </HeadingTeriniary>
-              <Price> $39.00 </Price>
-              <Period> MONTH </Period>
+              <HeadingTeriniary> Unlimited Plan </HeadingTeriniary>{" "}
+              <Price> $39 .00 </Price> <Period> MONTH </Period>{" "}
               <Description>
                 Collaborative financial tracking and planning for small
-                businesses and enterprises.
-              </Description>
+                businesses and enterprises.{" "}
+              </Description>{" "}
               <Link to="/charge">
-                <button className="btn btn-main--pricing"> Start Now </button>
-              </Link>
-            </PricingBox>
-          </Row>
-        </Container>
+                <button className="btn btn-main--pricing"> Start Now </button>{" "}
+              </Link>{" "}
+            </PricingBox>{" "}
+          </Row>{" "}
+        </Container>{" "}
       </Pricing>
     );
   }

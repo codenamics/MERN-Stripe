@@ -11,7 +11,7 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <Route exact path="/" component={Pricing} />
-          {/* <Route exact path="/charge" component={Stripe} /> */}
+          <Route exact path="/charge" component={Stripe} />
         </React.Fragment>
       </Router>
     );

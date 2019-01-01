@@ -8,7 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+.horizontal {
+  border-left: 1px solid #4b4b4b21;
+  border-right: 1px solid #4b4b4b21;
+}
 
 .StripeElement {
   padding: 16px 10px 16px 10px;
@@ -29,11 +32,6 @@ body {
   color: green;
 }
 
-
-
-
-
-
 .btn-main {
   color: #fff;
   border: none;
@@ -47,8 +45,6 @@ body {
     margin-bottom: 20px;
   }
 }
-
-
 
 .btn-main--pricing {
   border-width: 1px;
