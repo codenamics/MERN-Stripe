@@ -11,19 +11,24 @@ app.post("/charge", (req, res) => {
         token,
         email
     } = req.body
-    stripe.charges.create({
-        amount: price,
-        currency: "usd",
-        source: token
-    }).then(
-        status => {
+
+    stripe.customers.create({
+            email,
+            source: token
+        })
+        .then(customer => stripe.charges.create({
+            amount,
+            description: email,
+            currency: 'usd',
+            customer: customer.id
+        }))
+        .then(status => {
             res.json({
                 status
             })
             // isValid = status.ok
 
-        }
-    ).catch(err => res.send(err))
+        }).catch(err => res.send(err))
 
     if (email !== '' || email !== undefined) {
 
