@@ -10,7 +10,21 @@ class App extends Component {
         <Router>
           <React.Fragment>
             <Route exact path="/" component={Pricing} />
-            <Route exact path="/charge" component={Stripe} />
+            <Route
+              exact
+              path="/charge/1"
+              render={props => <Stripe price="3000" {...props} />}
+            />
+            <Route
+              exact
+              path="/charge/2"
+              render={props => <Stripe price="4000" {...props} />}
+            />
+            <Route
+              exact
+              path="/charge/3"
+              render={props => <Stripe price="5000" {...props} />}
+            />
           </React.Fragment>
         </Router>
       </StripeProvider>

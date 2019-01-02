@@ -79,34 +79,33 @@ class CheckoutForm extends Component {
     this.state = {
       complete: false,
       name: "",
-      email: ""
+      email: "",
+      price: this.props.price
     };
   }
+
   handleChange = input => e => {
     this.setState({
       [input]: e.target.value
     });
-    console.log(this.state.email);
   };
   submit = async () => {
     let { token } = await this.props.stripe.createToken({
-      name: this.state.name,
-      email: this.state.email
+      name: this.state.name
     });
-    console.log(token);
-    const email = this.state.email;
     const data = {
       token: token.id,
-      email
+      email: this.state.email,
+      price: this.state.price
     };
     let response = await fetch("/charge", {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     });
-    console.log(data);
+    console.log(response);
     if (response.ok)
       this.setState({
         complete: true

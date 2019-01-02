@@ -72,47 +72,47 @@ export default class Pricings extends Component {
     return (
       <Pricing>
         <Container>
-          <HeadingSecondary> Pricing </HeadingSecondary>{" "}
+          <HeadingSecondary> Pricing </HeadingSecondary>
           <p className="text__secondary text__secondary--desc text-center">
             Get started for free, or have multiple calendars right from the
             beginning.Explore our monthly and yearly plans and pick the one that
-            best suits your needs.{" "}
-          </p>{" "}
+            best suits your needs.
+          </p>
           <Row>
             <PricingBox>
-              <HeadingTeriniary> Starter Plan </HeadingTeriniary>{" "}
-              <Price> Free </Price> <Period> MONTH </Period>{" "}
+              <HeadingTeriniary> Starter Plan </HeadingTeriniary>
+              <Price> Free </Price> <Period> MONTH </Period>
               <Description>
-                The easiest way to get started with Dollarbird for everyone.{" "}
-              </Description>{" "}
-              <Link to="/charge">
-                <button className="btn btn-main--pricing"> Start Now </button>{" "}
-              </Link>{" "}
-            </PricingBox>{" "}
+                The easiest way to get started with Dollarbird for everyone.
+              </Description>
+              <Link to="/charge/1">
+                <button className="btn btn-main--pricing"> Start Now </button>
+              </Link>
+            </PricingBox>
             <PricingBox className="horizontal">
-              <HeadingTeriniary> Enterprise Plan </HeadingTeriniary>{" "}
-              <Price active> $19 .00 </Price> <Period> MONTH </Period>{" "}
+              <HeadingTeriniary> Enterprise Plan </HeadingTeriniary>
+              <Price active> $19 .00 </Price> <Period> MONTH </Period>
               <Description>
                 Unlimited for 15 Users.Advanced collaborative option for
-                partners, families, freelancers.{" "}
-              </Description>{" "}
-              <Link to="/charge">
-                <button className="btn btn-main"> Start Now </button>{" "}
-              </Link>{" "}
-            </PricingBox>{" "}
+                partners, families, freelancers.
+              </Description>
+              <Link to="/charge/2">
+                <button className="btn btn-main"> Start Now </button>
+              </Link>
+            </PricingBox>
             <PricingBox>
-              <HeadingTeriniary> Unlimited Plan </HeadingTeriniary>{" "}
-              <Price> $39 .00 </Price> <Period> MONTH </Period>{" "}
+              <HeadingTeriniary> Unlimited Plan </HeadingTeriniary>
+              <Price> $39 .00 </Price> <Period> MONTH </Period>
               <Description>
                 Collaborative financial tracking and planning for small
-                businesses and enterprises.{" "}
-              </Description>{" "}
-              <Link to="/charge">
-                <button className="btn btn-main--pricing"> Start Now </button>{" "}
-              </Link>{" "}
-            </PricingBox>{" "}
-          </Row>{" "}
-        </Container>{" "}
+                businesses and enterprises.
+              </Description>
+              <Link to="/charge/3">
+                <button className="btn btn-main--pricing"> Start Now </button>
+              </Link>
+            </PricingBox>
+          </Row>
+        </Container>
       </Pricing>
     );
   }
