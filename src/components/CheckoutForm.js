@@ -55,6 +55,7 @@ const Input = styled.input`
   background-color: transparent;
   -webkit-animation: 1ms void-animation-out;
   font-size: 16px;
+  outline: none;
 `;
 
 const ButtonCheckOut = styled.button`

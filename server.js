@@ -17,64 +17,76 @@ app.post("/charge", (req, res) => {
             source: token
         })
         .then(customer => stripe.charges.create({
-            amount,
+            amount: price,
             description: email,
             currency: 'usd',
-            customer: customer.id
+            customer: customer.id,
+            receipt_email: email
         }))
         .then(status => {
             res.json({
                 status
             })
-            // isValid = status.ok
-
         }).catch(err => res.send(err))
 
     if (email !== '' || email !== undefined) {
 
         const output = `
       <h1>You just purchase plan ${price}</h1>
-      
       `;
         let transporter = nodemailer.createTransport({
             host: process.env.SMTP,
             port: process.SMTP_PORT,
-            secure: true, // true for 465, false for other ports
+            secure: true,
             auth: {
-                user: process.env.AUTH_USER, // generated ethereal user
-                pass: process.env.AUTH_PASS // generated ethereal password
+                user: process.env.AUTH_USER,
+                pass: process.env.AUTH_PASS
             },
             tls: {
                 rejectUnauthorized: false
             }
         });
 
-        // setup email data with unicode symbols
         let mailOptions = {
-            from: '"NewHorizon"', // sender address
+            from: '"NewHorizon"',
             to: email,
-            subject: `New stack for ${price}`, // Subject line
-            html: output // html body
+            subject: `New stack for ${price}`,
+            html: output
         };
-
-        // send mail with defined transport object
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
             }
-            console.log("Message sent: %s", info.messageId);
-            // Preview only available when sending through an Ethereal account
-            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
             res.status(200).json({
                 msg: "Message has been sent"
             });
         });
     }
-
-
-
-
 });
+
+
+app.get('/customers', (req, res) => {
+    stripe.customers.list({
+        limit: 3
+    }, ).then(customers => console.log(customers))
+})
+
+
+app.get('/charges', (req, res) => {
+    stripe.charges.list({
+        limit: 3
+    }).then(charges => {
+        console.log(charges)
+    })
+})
+
+
+app.get('/balance', (req, res) => {
+    stripe.balance.retrieve()
+        .then(balance => console.log(balance))
+})
+
+
 
 const port = process.env.PORT
 app.listen(3000, () => console.log("Listening on port 3000"));
