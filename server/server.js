@@ -1,8 +1,15 @@
 require('dotenv').load();
 const app = require("express")();
-const stripe = require("stripe")(process.env.SECRET_KEY);
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
+
+const stripe = require("stripe")(process.env.SECRET_KEY);
+const mongoose = require('mongoose')
+
+mongoose.connect(process.env.mongoURI)
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err))
+
 app.use(bodyParser.json());
 
 app.post("/charge", (req, res) => {
@@ -89,4 +96,4 @@ app.get('/balance', (req, res) => {
 
 
 const port = process.env.PORT
-app.listen(3000, () => console.log("Listening on port 3000"));
+app.listen(4000, () => console.log("Listening on port 4000"));
