@@ -6,9 +6,22 @@ const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const User = require('../../models/User')
 
+// Load Input Validation
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
+
+
 //  /users/register
 //  Register user
 router.post('/register', (req, res) => {
+    const {
+        errors,
+        isValid
+    } = validateRegisterInput(req.body)
+
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
     const {
         email,
         password,
@@ -19,9 +32,10 @@ router.post('/register', (req, res) => {
         })
         .then((user) => {
             if (user) {
-                return res.status(400).json({
-                    email: "Email already exists"
-                })
+                errors.email = "Email already exists"
+                return res.status(400).json(
+                    errors
+                )
             } else {
                 const newUser = new User({
                     email,
