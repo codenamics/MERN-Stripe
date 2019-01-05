@@ -2,6 +2,7 @@ require('dotenv').load();
 const app = require("express")();
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
 const stripe = require("stripe")(process.env.SECRET_KEY);
 const mongoose = require('mongoose')
@@ -21,6 +22,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+
+//Passport
+app.use(passport.initialize())
+require('./config/passport')(passport)
+
 //Use routes
 app.use('/users', users)
 app.use('/charge', charge)
