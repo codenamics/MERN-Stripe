@@ -62,6 +62,14 @@ router.post('/register', (req, res) => {
 //  Login user / Return Token
 router.post('/login', (req, res) => {
     const {
+        errors,
+        isValid
+    } = validateLoginInput(req.body)
+
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+    const {
         email,
         password
     } = req.body
