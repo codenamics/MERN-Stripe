@@ -67,18 +67,16 @@ router.get("/all", (req, res) => {
       limit: 3
     })
     .then(charges => {
-      let promises = charges.data.map(charge => {
-        let newData = new Charge({ amount: charge.amount });
-        return newData.save();
+      const dataForSaving = charges.data.map(charge => {
+        return {
+          amount: charge.amount
+        };
       });
-      return Promise.all(promises);
-    })
-    .then(result => {
-      res.json(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.error(err);
+      Charge.insertMany(dataForSaving)
+        .then(docs => {
+          res.json(docs);
+        })
+        .catch(err => console.log(err));
     });
 });
 
