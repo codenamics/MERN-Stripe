@@ -3,27 +3,43 @@ const express = require("express");
 const router = express.Router();
 const stripe = require("stripe")(process.env.SECRET_KEY);
 const Charge = require("../../models/Charge");
-router.post("/pay", (req, res) => {
-  const { price, token, email } = req.body;
+const nodemailer = require('nodemailer')
 
-  stripe.customers
-    .create({
-      email,
+router.post("/pay", (req, res) => {
+  const {
+    price,
+    token,
+    email,
+    name
+  } = req.body;
+  // stripe.customers
+  //   .create({
+  //     email,
+  //     source: token
+  //   })
+  //   .then(customer =>
+  stripe.charges.create({
+      amount: price,
+      currency: "usd",
       source: token
+      // customer: customer.id,
+      // receipt_email: email
     })
-    .then(customer =>
-      stripe.charges.create({
-        amount: price,
-        description: email,
-        currency: "usd",
-        customer: customer.id,
-        receipt_email: email
-      })
-    )
+    // )
     .then(status => {
       res.json({
         status
       });
+      const newData = new Charge({
+        name,
+        email,
+        amount: price
+      })
+      newData.save().then(charge => {
+        res.json({
+          charge
+        })
+      })
     })
     .catch(err => res.send(err));
 
@@ -63,12 +79,11 @@ router.post("/pay", (req, res) => {
 
 router.get("/all", (req, res) => {
   stripe.charges
-    .list({
-      limit: 3
-    })
+    .list()
     .then(charges => {
       const dataForSaving = charges.data.map(charge => {
         return {
+          id: charge._id,
           amount: charge.amount
         };
       });

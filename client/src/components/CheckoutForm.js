@@ -97,9 +97,10 @@ class CheckoutForm extends Component {
     const data = {
       token: token.id,
       email: this.state.email,
-      price: this.state.price
+      price: this.state.price,
+      name: this.state.name
     };
-    let response = await fetch("/charge", {
+    let response = await fetch("/charge/pay", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
