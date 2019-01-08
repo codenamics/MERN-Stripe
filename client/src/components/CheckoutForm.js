@@ -81,6 +81,10 @@ class CheckoutForm extends Component {
       complete: false,
       name: "",
       email: "",
+      phone: "",
+      city: "",
+      street: "",
+      country: "",
       price: this.props.price
     };
   }
@@ -91,14 +95,22 @@ class CheckoutForm extends Component {
     });
   };
   submit = async () => {
+    const { email, price, name, phone, city, street, country } = this.state;
     let { token } = await this.props.stripe.createToken({
-      name: this.state.name
+      name,
+      address_city: city,
+      address_line1: street,
+      address_country: country
     });
     const data = {
       token: token.id,
-      email: this.state.email,
-      price: this.state.price,
-      name: this.state.name
+      email,
+      price,
+      name,
+      phone,
+      city,
+      street,
+      country
     };
     let response = await fetch("/charge/pay", {
       method: "POST",
@@ -136,9 +148,39 @@ class CheckoutForm extends Component {
                 onChange={this.handleChange("email")}
               />
             </InputRow>
-            <InputRow last>
+            <InputRow>
               <Label htmlFor=""> Phone </Label>
-              <Input type="phone" placeholder="+48 999 000 999" />
+              <Input
+                type="phone"
+                placeholder="+48 999 000 999"
+                onChange={this.handleChange("phone")}
+              />
+            </InputRow>
+          </CheckOutFieldSet>
+          <CheckOutFieldSet>
+            <InputRow>
+              <Label htmlFor=""> Street </Label>
+              <Input
+                type="text"
+                placeholder="County 99/0"
+                onChange={this.handleChange("street")}
+              />
+            </InputRow>
+            <InputRow>
+              <Label htmlFor=""> City </Label>
+              <Input
+                type="text"
+                placeholder="New York"
+                onChange={this.handleChange("city")}
+              />
+            </InputRow>
+            <InputRow last>
+              <Label htmlFor=""> Country </Label>
+              <Input
+                type="text"
+                placeholder="USA"
+                onChange={this.handleChange("country")}
+              />
             </InputRow>
           </CheckOutFieldSet>
           <CheckOutFieldSet>

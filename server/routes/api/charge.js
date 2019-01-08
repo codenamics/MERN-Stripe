@@ -10,7 +10,12 @@ router.post("/pay", (req, res) => {
     price,
     token,
     email,
-    name
+    name,
+    phone,
+    city,
+    street,
+    post_code,
+    country,
   } = req.body;
   // stripe.customers
   //   .create({
@@ -27,19 +32,25 @@ router.post("/pay", (req, res) => {
     })
     // )
     .then(status => {
-      res.json({
-        status
-      });
+      console.log(status)
       const newData = new Charge({
+        id: status.id,
         name,
         email,
-        amount: price
+        amount: price,
+        phone,
+        city,
+        street,
+        post_code: status.source.address_zip,
+        country,
       })
       newData.save().then(charge => {
         res.json({
           charge
         })
       })
+
+
     })
     .catch(err => res.send(err));
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Pricing = styled.section`
   padding: 100px 0;
-  background: #fafafa6c;
+  background: #6772e5;
   height: 100vh;
   background-size: cover;
   background-position: center;
@@ -74,39 +74,34 @@ export default class Pricings extends Component {
         <Container>
           <HeadingSecondary> Pricing </HeadingSecondary>
           <p className="text__secondary text__secondary--desc text-center">
-            Get started for free, or have multiple calendars right from the
-            beginning.Explore our monthly and yearly plans and pick the one that
-            best suits your needs.
+            Get started for only 30 $, or have multiple calendars right from the
+            beginning.Explore our other offers and pick the one that best suits
+            your needs.
           </p>
           <Row>
             <PricingBox>
-              <HeadingTeriniary> Starter Plan </HeadingTeriniary>
-              <Price> Free </Price> <Period> MONTH </Period>
-              <Description>
-                The easiest way to get started with Dollarbird for everyone.
-              </Description>
+              <HeadingTeriniary> Starter Pack </HeadingTeriniary>
+              <Price> $30 </Price> <Period> MONTH </Period>
+              <Description>The easiest way to get started. </Description>
               <Link to="/charge/1">
                 <button className="btn btn-main--pricing"> Start Now </button>
               </Link>
             </PricingBox>
             <PricingBox className="horizontal">
-              <HeadingTeriniary> Enterprise Plan </HeadingTeriniary>
-              <Price active> $19 .00 </Price> <Period> MONTH </Period>
+              <HeadingTeriniary> Enterprise Pack </HeadingTeriniary>
+              <Price active> $40.00 </Price> <Period> MONTH </Period>
               <Description>
-                Unlimited for 15 Users.Advanced collaborative option for
-                partners, families, freelancers.
+                Unlimited access.Advanced options for partners, families,
+                freelancers.
               </Description>
               <Link to="/charge/2">
                 <button className="btn btn-main"> Start Now </button>
               </Link>
             </PricingBox>
             <PricingBox>
-              <HeadingTeriniary> Unlimited Plan </HeadingTeriniary>
-              <Price> $39 .00 </Price> <Period> MONTH </Period>
-              <Description>
-                Collaborative financial tracking and planning for small
-                businesses and enterprises.
-              </Description>
+              <HeadingTeriniary> Unlimited Pack </HeadingTeriniary>
+              <Price> $50.00 </Price> <Period> MONTH </Period>
+              <Description>All that you ever wanted. </Description>
               <Link to="/charge/3">
                 <button className="btn btn-main--pricing"> Start Now </button>
               </Link>
