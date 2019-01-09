@@ -14,65 +14,71 @@ exports.createCharge = (req, res) => {
         street,
         country,
     } = req.body;
-    stripe.charges.create({
-            amount: price,
-            currency: "usd",
-            source: token
-
-        })
-        .then(status => {
-            console.log(status)
-            const newData = new Charge({
-                id: status.id,
-                name,
-                email,
+    stripe.customers.create({
+        description: 'Customer for jenny.rosen@example.com',
+        source: token
+    }).then(customer => {
+        stripe.charges.create({
                 amount: price,
-                phone,
-                city,
-                street,
-                post_code: status.source.address_zip,
-                country,
+                currency: "usd",
+
+                customer: customer.id
             })
-            newData.save().then(charge => {
-                res.json({
-                    charge
+            .then(status => {
+                console.log(status)
+                const newData = new Charge({
+                    id: status.id,
+                    name,
+                    email,
+                    amount: price,
+                    phone,
+                    city,
+                    street,
+                    post_code: status.source.address_zip,
+                    country,
+                })
+                newData.save().then(charge => {
+                    res.json({
+                        charge
+                    })
                 })
             })
-        })
-        .catch(err => res.send(err));
+            .catch(err => res.send(err));
 
-    if (email !== "" || email !== undefined) {
-        const output = `
-      <h1>You just purchase plan ${price}</h1>
-      `;
-        let transporter = nodemailer.createTransport({
-            host: process.env.SMTP,
-            port: process.SMTP_PORT,
-            secure: true,
-            auth: {
-                user: process.env.AUTH_USER,
-                pass: process.env.AUTH_PASS
-            },
-            tls: {
-                rejectUnauthorized: false
-            }
-        });
-
-        let mailOptions = {
-            from: '"NewHorizon"',
-            to: email,
-            subject: `New stack for ${price}`,
-            html: output
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                return console.log(error);
-            }
-            res.status(200).json({
-                msg: "Message has been sent"
+        if (email !== "" || email !== undefined) {
+            const output = `
+          <h1>You just purchase plan ${price}</h1>
+          `;
+            let transporter = nodemailer.createTransport({
+                host: process.env.SMTP,
+                port: process.SMTP_PORT,
+                secure: true,
+                auth: {
+                    user: process.env.AUTH_USER,
+                    pass: process.env.AUTH_PASS
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
             });
-        });
-    }
+
+            let mailOptions = {
+                from: '"NewHorizon"',
+                to: email,
+                subject: `New stack for ${price}`,
+                html: output
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                res.status(200).json({
+                    msg: "Message has been sent"
+                });
+            });
+        }
+    })
+
 };
 
 exports.getAllCharges = (req, res) => {
