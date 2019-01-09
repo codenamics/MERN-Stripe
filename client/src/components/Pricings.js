@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Pricing = styled.section`
   padding: 100px 0;
-  background: #6772e5;
+  background: #fafafa;
   height: 100vh;
   background-size: cover;
   background-position: center;
@@ -72,42 +72,42 @@ export default class Pricings extends Component {
     return (
       <Pricing>
         <Container>
-          <HeadingSecondary> Pricing </HeadingSecondary>
+          <HeadingSecondary> Pricing </HeadingSecondary>{" "}
           <p className="text__secondary text__secondary--desc text-center">
             Get started for only 30 $, or have multiple calendars right from the
             beginning.Explore our other offers and pick the one that best suits
-            your needs.
-          </p>
+            your needs.{" "}
+          </p>{" "}
           <Row>
             <PricingBox>
-              <HeadingTeriniary> Starter Pack </HeadingTeriniary>
+              <HeadingTeriniary> Starter Pack </HeadingTeriniary>{" "}
               <Price> $30 </Price> <Period> MONTH </Period>
-              <Description>The easiest way to get started. </Description>
+              <Description> The easiest way to get started. </Description>{" "}
               <Link to="/charge/1">
-                <button className="btn btn-main--pricing"> Start Now </button>
-              </Link>
-            </PricingBox>
+                <button className="btn btn-main--pricing"> Start Now </button>{" "}
+              </Link>{" "}
+            </PricingBox>{" "}
             <PricingBox className="horizontal">
-              <HeadingTeriniary> Enterprise Pack </HeadingTeriniary>
-              <Price active> $40.00 </Price> <Period> MONTH </Period>
+              <HeadingTeriniary> Enterprise Pack </HeadingTeriniary>{" "}
+              <Price active> $40 .00 </Price> <Period> MONTH </Period>
               <Description>
                 Unlimited access.Advanced options for partners, families,
-                freelancers.
-              </Description>
+                freelancers.{" "}
+              </Description>{" "}
               <Link to="/charge/2">
-                <button className="btn btn-main"> Start Now </button>
-              </Link>
-            </PricingBox>
+                <button className="btn btn-main"> Start Now </button>{" "}
+              </Link>{" "}
+            </PricingBox>{" "}
             <PricingBox>
-              <HeadingTeriniary> Unlimited Pack </HeadingTeriniary>
-              <Price> $50.00 </Price> <Period> MONTH </Period>
-              <Description>All that you ever wanted. </Description>
+              <HeadingTeriniary> Unlimited Pack </HeadingTeriniary>{" "}
+              <Price> $50 .00 </Price> <Period> MONTH </Period>
+              <Description> All that you ever wanted. </Description>{" "}
               <Link to="/charge/3">
-                <button className="btn btn-main--pricing"> Start Now </button>
-              </Link>
-            </PricingBox>
-          </Row>
-        </Container>
+                <button className="btn btn-main--pricing"> Start Now </button>{" "}
+              </Link>{" "}
+            </PricingBox>{" "}
+          </Row>{" "}
+        </Container>{" "}
       </Pricing>
     );
   }

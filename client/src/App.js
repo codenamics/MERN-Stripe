@@ -4,6 +4,7 @@ import Pricing from "./components/Pricings";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Stripe from "./components/Stripe";
 import LandPage from "./components/LandPage";
+import SuccessfulPay from "./components/SuccessfulPay";
 class App extends Component {
   render() {
     return (
@@ -11,6 +12,8 @@ class App extends Component {
         <Router>
           <React.Fragment>
             <Route exact path="/" component={LandPage} />
+            <Route exact path="/ss" component={SuccessfulPay} />
+            <Route exact path="/pricing" component={Pricing} />
             <Route
               exact
               path="/charge/1"

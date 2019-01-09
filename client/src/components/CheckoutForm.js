@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import styled from "styled-components";
+import SuccessfulPay from "./SuccessfulPay";
 
 const CheckOut = styled.div`
   background-color: #6772e5;
@@ -127,7 +128,7 @@ class CheckoutForm extends Component {
   };
 
   render() {
-    if (this.state.complete) return <h1> Purchase Complete </h1>;
+    if (this.state.complete) return <SuccessfulPay />;
     return (
       <CheckOut>
         <CheckOutForm>

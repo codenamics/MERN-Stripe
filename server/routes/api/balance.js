@@ -1,11 +1,8 @@
 require('dotenv').load();
 const express = require('express')
 const router = express.Router()
-const stripe = require("stripe")(process.env.SECRET_KEY);
+const balanceController = require('../../controllers/balanceController')
 
-router.get('/balance', (req, res) => {
-    stripe.balance.retrieve()
-        .then(balance => console.log(balance))
-})
+router.get('/balance', balanceController.getBalance)
 
 module.exports = router;

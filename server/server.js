@@ -1,10 +1,7 @@
 require('dotenv').load();
 const app = require("express")();
-const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
 const passport = require('passport')
-
-const stripe = require("stripe")(process.env.SECRET_KEY);
 const mongoose = require('mongoose')
 
 //Routes
@@ -31,13 +28,7 @@ require('./config/passport')(passport)
 app.use('/users', users)
 app.use('/charge', charge)
 app.use('/balance', balance)
-app.use('/customers', customers)
-
-
-
-
-
-
+// app.use('/customers', customers)
 
 
 const port = process.env.PORT
