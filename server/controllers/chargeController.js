@@ -2,8 +2,17 @@ require("dotenv").load();
 const stripe = require("stripe")(process.env.SECRET_KEY);
 const Charge = require("../models/Charge");
 const nodemailer = require('nodemailer')
-
+const validateChargeInput = require('../validation/charge')
 exports.createCharge = (req, res) => {
+    const {
+        errors,
+        isValid
+    } = validateChargeInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
     const {
         price,
         token,
@@ -15,8 +24,18 @@ exports.createCharge = (req, res) => {
         country,
     } = req.body;
     stripe.customers.create({
-        description: 'Customer for jenny.rosen@example.com',
-        source: token
+        source: token,
+        email,
+        shipping: {
+            address: {
+                line1: street,
+                city,
+                country,
+
+            },
+            name,
+            phone
+        }
     }).then(customer => {
         stripe.charges.create({
                 amount: price,
@@ -77,7 +96,7 @@ exports.createCharge = (req, res) => {
                 });
             });
         }
-    })
+    }).catch(err => console.log(err))
 
 };
 

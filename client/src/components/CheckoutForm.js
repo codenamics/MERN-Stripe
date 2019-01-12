@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import styled from "styled-components";
 import SuccessfulPay from "./SuccessfulPay";
+import axios from "axios";
 
 const CheckOut = styled.div`
   background-color: #6772e5;
@@ -97,34 +98,38 @@ class CheckoutForm extends Component {
   };
   submit = async () => {
     const { email, price, name, phone, city, street, country } = this.state;
-    let { token } = await this.props.stripe.createToken({
-      name,
-      address_city: city,
-      address_line1: street,
-      address_country: country
-    });
-    const data = {
-      token: token.id,
-      email,
-      price,
-      name,
-      phone,
-      city,
-      street,
-      country
-    };
-    let response = await fetch("/charge/pay", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-    console.log(response);
-    if (response.ok)
-      this.setState({
-        complete: true
+    let { token } = await this.props.stripe
+      .createToken({
+        name,
+        address_city: city,
+        address_line1: street,
+        address_country: country
+      })
+      .catch(err => {
+        console.log(err);
       });
+    if (!token) {
+      console.log("Token missing");
+    } else {
+      const data = {
+        token: token.id,
+        email,
+        price,
+        name,
+        phone,
+        city,
+        street,
+        country
+      };
+      axios
+        .post("/charge/pay", data)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    }
   };
 
   render() {
