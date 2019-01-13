@@ -8,8 +8,6 @@ exports.createCharge = (req, res) => {
         errors,
         isValid
     } = validateChargeInput(req.body);
-
-    // Check Validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
@@ -31,7 +29,6 @@ exports.createCharge = (req, res) => {
                 line1: street,
                 city,
                 country,
-
             },
             name,
             phone
@@ -40,7 +37,6 @@ exports.createCharge = (req, res) => {
         stripe.charges.create({
                 amount: price,
                 currency: "usd",
-
                 customer: customer.id
             })
             .then(status => {
@@ -67,6 +63,7 @@ exports.createCharge = (req, res) => {
         if (email !== "" || email !== undefined) {
             const output = `
           <h1>You just purchase plan ${price}</h1>
+          <p>Your customer id: ${customer.id}</p>
           `;
             let transporter = nodemailer.createTransport({
                 host: process.env.SMTP,
@@ -82,7 +79,7 @@ exports.createCharge = (req, res) => {
             });
 
             let mailOptions = {
-                from: '"NewHorizon"',
+                from: '"NewHorizon" <info@mail.com>',
                 to: email,
                 subject: `New stack for ${price}`,
                 html: output

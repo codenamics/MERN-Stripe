@@ -62,7 +62,7 @@ const Input = styled.input`
 
 const ButtonCheckOut = styled.button`
   display: block;
-  width: 100%;
+  width: 92%;
   max-width: 469px;
   height: 40px;
   margin: 0 auto;
@@ -80,6 +80,8 @@ class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      errors: {},
+      tokenErrors: "",
       complete: false,
       name: "",
       email: "",
@@ -109,7 +111,9 @@ class CheckoutForm extends Component {
         console.log(err);
       });
     if (!token) {
-      console.log("Token missing");
+      this.setState({
+        tokenErrors: "Token missing"
+      });
     } else {
       const data = {
         token: token.id,
@@ -124,15 +128,22 @@ class CheckoutForm extends Component {
       axios
         .post("/charge/pay", data)
         .then(res => {
-          console.log(res);
+          if (res.status === 200) {
+            this.setState({
+              complete: true
+            });
+          }
         })
         .catch(err => {
-          console.log(err.response.data);
+          this.setState({
+            errors: err.response.data
+          });
         });
     }
   };
 
   render() {
+    const { errors } = this.state;
     if (this.state.complete) return <SuccessfulPay />;
     return (
       <CheckOut>
@@ -145,7 +156,11 @@ class CheckoutForm extends Component {
                 placeholder="Jane Doe"
                 onChange={this.handleChange("name")}
               />
+              {errors.name && (
+                <div className="invalid-feedback">{errors.name}</div>
+              )}
             </InputRow>
+
             <InputRow>
               <Label htmlFor=""> Email </Label>
               <Input
@@ -153,6 +168,9 @@ class CheckoutForm extends Component {
                 placeholder="jane@doe.com"
                 onChange={this.handleChange("email")}
               />
+              {errors.email && (
+                <div className="invalid-feedback">{errors.email}</div>
+              )}
             </InputRow>
             <InputRow>
               <Label htmlFor=""> Phone </Label>
@@ -161,6 +179,9 @@ class CheckoutForm extends Component {
                 placeholder="+48 999 000 999"
                 onChange={this.handleChange("phone")}
               />
+              {errors.phone && (
+                <div className="invalid-feedback">{errors.phone}</div>
+              )}
             </InputRow>
           </CheckOutFieldSet>
           <CheckOutFieldSet>
@@ -171,6 +192,9 @@ class CheckoutForm extends Component {
                 placeholder="County 99/0"
                 onChange={this.handleChange("street")}
               />
+              {errors.street && (
+                <div className="invalid-feedback">{errors.street}</div>
+              )}
             </InputRow>
             <InputRow>
               <Label htmlFor=""> City </Label>
@@ -179,6 +203,9 @@ class CheckoutForm extends Component {
                 placeholder="New York"
                 onChange={this.handleChange("city")}
               />
+              {errors.city && (
+                <div className="invalid-feedback">{errors.city}</div>
+              )}
             </InputRow>
             <InputRow last>
               <Label htmlFor=""> Country </Label>
@@ -187,6 +214,9 @@ class CheckoutForm extends Component {
                 placeholder="USA"
                 onChange={this.handleChange("country")}
               />
+              {errors.country && (
+                <div className="invalid-feedback">{errors.country}</div>
+              )}
             </InputRow>
           </CheckOutFieldSet>
           <CheckOutFieldSet>

@@ -131,3 +131,11 @@ body {
     box-shadow: inset 0px 0px 0px 80px #7ac142;
   }
 }
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
