@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Spring } from "react-spring";
 
 const Pricing = styled.section`
   padding: 100px 0;
@@ -72,42 +73,90 @@ export default class Pricings extends Component {
     return (
       <Pricing>
         <Container>
-          <HeadingSecondary> Pricing </HeadingSecondary>{" "}
+          <HeadingSecondary> Pricing </HeadingSecondary>
           <p className="text__secondary text__secondary--desc text-center">
             Get started for only 30 $, or have multiple calendars right from the
             beginning.Explore our other offers and pick the one that best suits
-            your needs.{" "}
-          </p>{" "}
+            your needs.
+          </p>
           <Row>
-            <PricingBox>
-              <HeadingTeriniary> Starter Pack </HeadingTeriniary>{" "}
-              <Price> $30 </Price> <Period> MONTH </Period>
-              <Description> The easiest way to get started. </Description>{" "}
-              <Link to="/charge/1">
-                <button className="btn btn-main--pricing"> Start Now </button>{" "}
-              </Link>{" "}
-            </PricingBox>{" "}
-            <PricingBox className="horizontal">
-              <HeadingTeriniary> Enterprise Pack </HeadingTeriniary>{" "}
-              <Price active> $40 .00 </Price> <Period> MONTH </Period>
-              <Description>
-                Unlimited access.Advanced options for partners, families,
-                freelancers.{" "}
-              </Description>{" "}
-              <Link to="/charge/2">
-                <button className="btn btn-main"> Start Now </button>{" "}
-              </Link>{" "}
-            </PricingBox>{" "}
-            <PricingBox>
-              <HeadingTeriniary> Unlimited Pack </HeadingTeriniary>{" "}
-              <Price> $50 .00 </Price> <Period> MONTH </Period>
-              <Description> All that you ever wanted. </Description>{" "}
-              <Link to="/charge/3">
-                <button className="btn btn-main--pricing"> Start Now </button>{" "}
-              </Link>{" "}
-            </PricingBox>{" "}
-          </Row>{" "}
-        </Container>{" "}
+            <Spring
+              config={{
+                duration: 1000
+              }}
+              from={{
+                marginTop: -150,
+                opacity: 0
+              }}
+              to={{
+                marginTop: 0,
+                opacity: 1
+              }}
+            >
+              {props => (
+                <PricingBox style={props}>
+                  <HeadingTeriniary> Starter Pack </HeadingTeriniary>
+                  <Price> $30 </Price> <Period> MONTH </Period>
+                  <Description>The easiest way to get started.</Description>
+                  <Link to="/charge/1">
+                    <button className="btn btn-main--pricing">Start Now</button>
+                  </Link>
+                </PricingBox>
+              )}
+            </Spring>
+            <Spring
+              config={{
+                duration: 1200
+              }}
+              from={{
+                marginTop: -150,
+                opacity: 0
+              }}
+              to={{
+                marginTop: 0,
+                opacity: 1
+              }}
+            >
+              {props => (
+                <PricingBox style={props} className="horizontal">
+                  <HeadingTeriniary> Enterprise Pack </HeadingTeriniary>
+                  <Price active> $40 .00 </Price> <Period> MONTH </Period>
+                  <Description>
+                    Unlimited access.Advanced options for partners, families,
+                    freelancers.
+                  </Description>
+                  <Link to="/charge/2">
+                    <button className="btn btn-main"> Start Now </button>
+                  </Link>
+                </PricingBox>
+              )}
+            </Spring>
+            <Spring
+              config={{
+                duration: 1500
+              }}
+              from={{
+                marginTop: -150,
+                opacity: 0
+              }}
+              to={{
+                marginTop: 0,
+                opacity: 1
+              }}
+            >
+              {props => (
+                <PricingBox style={props}>
+                  <HeadingTeriniary> Unlimited Pack </HeadingTeriniary>
+                  <Price> $50 .00 </Price> <Period> MONTH </Period>
+                  <Description> All that you ever wanted. </Description>
+                  <Link to="/charge/3">
+                    <button className="btn btn-main--pricing">Start Now</button>
+                  </Link>
+                </PricingBox>
+              )}
+            </Spring>
+          </Row>
+        </Container>
       </Pricing>
     );
   }

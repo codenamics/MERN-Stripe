@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import phone from "../assets/smart.png";
+import { Spring } from "react-spring";
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -41,26 +43,54 @@ export default function LandPage() {
   return (
     <Grid>
       <LeftCon>
-        <Heading>
-          <H1>Reactive news</H1>
-          <Text>
-            Take control over your news feed: keep track of latates hot topic.
-            Get to know what is going around. Stay informed!
-          </Text>
-          <div>
-            <Link to="/pricing">
-              <button className="btn btn-main">Pricing</button>
-            </Link>
-            <Link to="/subscriptions">
-              <button className="btn btn-main btn-main--sub btn-main--pricing ml-25">
-                Subscriptions
-              </button>
-            </Link>
-          </div>
-        </Heading>
+        <Spring
+          config={{ duration: 1000 }}
+          from={{
+            marginTop: -250,
+            opacity: 0
+          }}
+          to={{
+            marginTop: 0,
+            opacity: 1
+          }}
+        >
+          {props => (
+            <Heading style={props}>
+              <H1> Reactive news </H1>
+              <Text>
+                Take control over your news feed: keep track of latates hot
+                topic. Get to know what is going around.Stay informed!
+              </Text>
+              <div>
+                <Link to="/pricing">
+                  <button className="btn btn-main"> Pricing </button>
+                </Link>
+                <Link to="/subscriptions">
+                  <button className="btn btn-main btn-main--sub btn-main--pricing ml-25">
+                    Subscriptions
+                  </button>
+                </Link>
+              </div>
+            </Heading>
+          )}
+        </Spring>
       </LeftCon>
       <ImgCon>
-        <Img src={phone} alt="phone" className="img-fluid" />
+        <Spring
+          config={{ duration: 1500 }}
+          from={{
+            marginRight: -250,
+            opacity: 0
+          }}
+          to={{
+            marginRight: 0,
+            opacity: 1
+          }}
+        >
+          {props => (
+            <Img style={props} src={phone} alt="phone" className="img-fluid" />
+          )}
+        </Spring>
       </ImgCon>
     </Grid>
   );
