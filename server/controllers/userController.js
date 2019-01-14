@@ -111,9 +111,7 @@ exports.loginUser = (req, res) => {
 
 //  /users/current
 //  Login user / Return Token
-exports.getCurrentUser = passport.authenticate('jwt', {
-    session: false
-}), (req, res) => {
+exports.getCurrentUser = (req, res) => {
     const {
         id,
         admin,
