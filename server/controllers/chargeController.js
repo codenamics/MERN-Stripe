@@ -98,19 +98,10 @@ exports.createCharge = (req, res) => {
 };
 
 exports.getAllCharges = (req, res) => {
-    stripe.charges
-        .list()
+    Charge.find()
         .then(charges => {
-            const dataForSaving = charges.data.map(charge => {
-                return {
-                    id: charge._id,
-                    amount: charge.amount
-                };
-            });
-            Charge.insertMany(dataForSaving)
-                .then(docs => {
-                    res.json(docs);
-                })
-                .catch(err => console.log(err));
-        });
+            res.status(200).json(charges);
+        }).catch(err => {
+            console.log(err)
+        })
 };
