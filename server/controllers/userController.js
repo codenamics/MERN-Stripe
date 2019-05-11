@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const User = require('../models/User')
 
+
 // Load Input Validation
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
@@ -48,6 +49,7 @@ exports.registerUser = (req, res) => {
                             .save()
                             .then(user => {
                                 res.json(user)
+
                             })
                             .catch(err => console.log(err))
                     })

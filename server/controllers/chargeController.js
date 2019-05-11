@@ -3,6 +3,8 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 const Charge = require("../models/Charge");
 const nodemailer = require('nodemailer')
 const validateChargeInput = require('../validation/charge')
+const client = require('twilio')(process.env.accountSid, process.env.authToken);
+
 exports.createCharge = (req, res) => {
     const {
         errors,
@@ -93,6 +95,13 @@ exports.createCharge = (req, res) => {
                 });
             });
         }
+        client.messages
+            .create({
+                from: process.env.from,
+                body: 'body',
+                to: process.env.to
+            })
+            .then(message => console.log(message));
     }).catch(err => console.log(err))
 
 };
