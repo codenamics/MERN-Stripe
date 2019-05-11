@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 const Charge = require("../models/Charge");
 const nodemailer = require('nodemailer')
 const validateChargeInput = require('../validation/charge')
-const client = require('twilio')();
+const client = require('twilio')(process.env.TWILO, process.env.TWILOAUTH);
 
 exports.createCharge = (req, res) => {
     const {
